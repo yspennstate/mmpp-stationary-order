@@ -1,0 +1,48 @@
+== 1. twelve-state cycle, rates p_i / 10^6, t = 19/2
+lambda = 1/1000  r = 2003/2000  a = r t = 38057/4000
+12000 alpha_i: [1500, 1433, 1250, 1000, 750, 567, 500, 567, 750, 1000, 1250, 1433]
+F(19/2) in [-3.40376335044947269591e-06, -3.40376335044947269591e-06]
+upper P(T^pi>t) - lower P(T^alpha>t) = -3.403763350449e-06
+PASS 12-state: row and column recurrences agree exactly
+PASS 12-state: F(19/2) < -1/300000 (signed enclosure)
+PASS 12-state: upper P(T^pi > t) - lower P(T^alpha > t) < -1/300000
+mpmath 40 digits: P(T^pi>t) = 0.990546031181966  P(T^alpha>t) = 0.990549434945316  diff = -3.40376335044947e-6
+enclosure width = 1.587e-46
+PASS 12-state: mpmath difference within 1e-30 of the rational enclosure
+PASS 12-state control: F(1/2) > 0 (the order holds at small t)
+== 2. 24-state block cycle, rate 2/3 on states 0..11, 0 on 12..23, t = 79/4
+lambda = 1/3  F(79/4) in [-1.1719068073579859239063961e-03, -1.1719068073579859239063961e-03]
+PASS 24-state: F(79/4) < -0.00117 (exact enclosure)
+mpmath: P(T^pi>t) = 0.0142536154664  P(T^alpha>t) = 0.0154255222738
+PASS 24-state: survival values 0.01425361547 and 0.01542552227
+== 3. cosine family on the n-cycle
+J_n(3 pi/(2 omega)) at n = 11, 12, 13: 0.07317563720566073 -0.02788854564556632 -0.1349788094796978
+PASS first-order minimum negative exactly for n >= 12 within 3..400
+x e^{3 pi x/2} at x = tan(pi/11), tan(pi/12): 1.1714420346734518 0.9471696329166215
+PASS criterion x e^{3 pi x/2} < 1 fails at n = 11 and holds at n = 12
+n=12 eps=0.001: F/eps = -0.00345333, first-order value -0.00348607
+n=12 eps=0.0001: F/eps = -0.00348278, first-order value -0.00348607
+n=12 eps=1e-05: F/eps = -0.00348574, first-order value -0.00348607
+PASS n=12: F/eps matches the first-order value (rel err < 1e-3 at eps = 1e-5)
+PASS n=12: closed form of (b^2/2) J_n(t) matches F/eps on a t-grid (max err < 1e-3)
+n=20 eps=0.001: F/eps = -0.12269309, first-order value -0.12457835
+n=20 eps=0.0001: F/eps = -0.12438852, first-order value -0.12457835
+n=20 eps=1e-05: F/eps = -0.12455935, first-order value -0.12457835
+PASS n=20: F/eps matches the first-order value (rel err < 1e-3 at eps = 1e-5)
+PASS n=20: closed form of (b^2/2) J_n(t) matches F/eps on a t-grid (max err < 1e-3)
+PASS n = 11, eps = 1e-4: F > 0 on a grid of t in [0.1, 60]
+== 4. periodic Cox process: lambda = 2 on [0,1/2), 0 on [1/2,1), period 1, lambda* = 1
+g(1/4), g(1/2), g(3/4), g(1) = [np.float64(1.0209311833456127), np.float64(1.0421906105532488), np.float64(1.020931183345613), np.float64(1.0)]
+PASS Cox: g > 1 on a grid in (0,1) and g(1) = 1
+hazard of T^pi at t = 1/4, 3/4, 9/10: [np.float64(0.8762833769663256), np.float64(1.1237166231496845), np.float64(1.0797873754550595)]
+PASS Cox: hazard of T^pi exceeds lambda* = 1 at t = 3/4
+== 5. reversible modulators
+instances: 1763  smallest (S_pi - S_alpha)/S_pi: -4.2674197509029464e-16
+PASS reversible: no violation beyond rounding (> -1e-9)
+== 6. He 2021 Section 4.3 convexity: six-cycle, d = (1/3, 2/5, 2/3, 1, 2/3, 2/5)
+f(0) = pi D^{-1} 1 = 2   f'(0) = -1/4   f''(0) = -1
+PASS six-cycle: f''(0) = -1
+f(1/1000) + f(3/1000) - 2 f(2/1000) = -9.73925023362e-7
+PASS six-cycle: exact midpoint convexity gap negative
+PASS six-cycle: f decreasing at the three points
+ALL PASS

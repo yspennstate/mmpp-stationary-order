@@ -1,0 +1,226 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools,enumitem}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\one}{\mathbf 1}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+
+\hypersetup{pdftitle={The time-stationary and Palm inter-arrival times of a Markov-modulated Poisson process need not be ordered},pdfauthor={Yitzchak Shmalo}}
+
+\title[MMPP inter-arrival times need not be ordered]{The time-stationary and Palm inter-arrival times of a Markov-modulated Poisson process need not be ordered}
+\author{Yitzchak Shmalo}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+
+\subjclass[2020]{60G55, 60K15, 60E15}
+\keywords{Markov-modulated Poisson process, Markovian arrival process, Palm distribution, stochastic order, Cox process, phase-type distribution}
+
+\begin{document}
+
+\begin{abstract}
+For an irreducible Markov-modulated Poisson process, let $T^\pi$ be the time from a stationary instant to the next arrival and $T^\alpha$ the time from an arrival to the next one in the event-stationary version. Asanjarani and Nazarathy conjectured that $T^\pi$ is stochastically larger than $T^\alpha$, and He listed the same property among open questions on the MMPP class of phase-type distributions. The conjecture is false. The order is equivalent to the hazard rate of $T^\pi$ never exceeding the arrival rate. For a Cox process driven by a non-constant periodic intensity with uniform phase this fails on a set of positive measure. For the MMPP on the directed $n$-cycle with arrival rates $\varepsilon(1+b\cos(2\pi j/n))$ it fails for all small $\varepsilon>0$ whenever $n\ge 12$, and an explicit twelve-state MMPP with positive rational rates has $\Pp(T^\pi>19/2)-\Pp(T^\alpha>19/2)<-1/300000$, proved in exact rational arithmetic. For reversible modulators the order holds. We also show that the mean of He's MMPP-type distribution need not be convex in the speed of modulation.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+A Markov-modulated Poisson process (MMPP) is given by an irreducible generator $Q$ on a finite set $\{1,\dots,m\}$ and a nonzero diagonal matrix $D=\operatorname{diag}(d_1,\dots,d_m)$ with $d_i\ge0$: a Markov chain $J$ with generator $Q$ runs in the background, and arrivals occur at rate $d_{J_t}$. Write $C=Q-D$, let $\pi$ be the stationary distribution of $Q$, let $\lambda=\pi D\one$ be the mean arrival rate, and let $\alpha=\pi D/\lambda$ be the law of the phase at an arrival in the event-stationary version. The time $T^\pi$ from time $0$ to the first arrival in the time-stationary process and the time $T^\alpha$ from an arrival to the next one in the event-stationary process are phase-type, with
+\begin{equation}\label{eq:surv}
+S_\pi(t)=\Pp(T^\pi>t)=\pi e^{Ct}\one,\qquad S_\alpha(t)=\Pp(T^\alpha>t)=\alpha e^{Ct}\one .
+\end{equation}
+Asanjarani and Nazarathy~\cite{AN} study four properties of such processes: $d^2\ge1$ for the index of dispersion of counts, a decreasing hazard rate for $T^\alpha$, $c^2\ge1$ for the squared coefficient of variation of $T^\alpha$, and the stochastic order $T^\pi\ge_{\rm st}T^\alpha$, which is property~(IV), equation~(2.9) of~\cite{AN}:
+\begin{equation}\label{eq:IV}
+\pi e^{Ct}\one\ \ge\ \alpha e^{Ct}\one\qquad\text{for all }t\ge0 .
+\end{equation}
+They prove all four for Markov-switched Poisson processes and for MMPPs of order two, observe that the hazard-rate property fails for general MMPPs, and state~\eqref{eq:IV} for every irreducible MMPP as Conjecture~3.9 of~\cite[p.~65]{AN} (Conjecture~4.2 in the preprint~\cite{ANarx}). Their search over $10^6$ random MMPPs of each order $3,4,5,6$ and over $10^6$ random cyclic generators of order $4$ found no violation. He~\cite[Section~4.3]{He} lists the same property, in the form ``$X_x$ is stochastically larger than $X_{D,x}$'', among the properties that all MMPP-type phase-type distributions have numerically. The squared-coefficient conjecture is a theorem of He~\cite[Theorem~3.2]{He}.
+
+We show that~\eqref{eq:IV} fails. The first observation is a reformulation. Since $\pi Q=0$, $S_\pi'(t)=\pi Ce^{Ct}\one=-\pi De^{Ct}\one=-\lambda S_\alpha(t)$, so
+\begin{equation}\label{eq:g}
+S_\pi(t)-S_\alpha(t)=S_\pi(t)+\frac{S_\pi'(t)}{\lambda}=\frac{e^{-\lambda t}}{\lambda}\,g'(t),\qquad g(t)=e^{\lambda t}S_\pi(t).
+\end{equation}
+Thus~\eqref{eq:IV} says exactly that $g$ is nondecreasing, that is, that the hazard rate $-S_\pi'/S_\pi$ of $T^\pi$ never exceeds $\lambda$. It always starts at $\lambda$, since $g'(0)=0$. Our counterexamples are processes in which this hazard overshoots $\lambda$.
+
+\begin{theorem}\label{thm:cox}
+Let $\ell$ be a bounded measurable function on $\R$ that is periodic and not almost everywhere constant, let $T>0$ be its least period (Lemma~\ref{lem:period}), let $\theta$ be uniform on $[0,T)$, and let $N$ be the Cox process with intensity $s\mapsto\ell(\theta+s)$. Put $\lambda=T^{-1}\int_0^T\ell$, $L_\vartheta(t)=\int_0^t\ell(\vartheta+s)\,ds$,
+\[
+S(t)=\Pp(N(0,t]=0)=\frac1T\int_0^Te^{-L_\vartheta(t)}d\vartheta,\qquad S^0(t)=\frac1{\lambda T}\int_0^T\ell(\vartheta)\,e^{-L_\vartheta(t)}d\vartheta .
+\]
+Then $-S'=\lambda S^0$ almost everywhere, $g(t)=e^{\lambda t}S(t)$ satisfies $g(0)=g(T)=1<g(t)$ for $0<t<T$, and $S(t)<S^0(t)$ for all $t$ in a set of positive measure in $(0,T)$.
+\end{theorem}
+
+Here $S^0$ is the survival function of the interval after a typical arrival: the phase seen at an arrival has density proportional to $\ell$, exactly as the phase of an MMPP seen at an arrival has law $\alpha=\pi D/\lambda$. Asanjarani and Nazarathy suggest Cox-process versions of their conjectures~\cite[Section~4]{AN}; Theorem~\ref{thm:cox} says the order fails for every non-constant periodic intensity. A long cycle of phases traversed at a steady pace imitates a periodic intensity, and this is the source of the MMPP counterexamples. The cleanest family is a small cosine modulation of a directed cycle.
+
+\begin{theorem}\label{thm:cycle}
+Let $n\ge 12$ and $0<b\le1$. Let $Q$ be the generator of the directed $n$-cycle, $Q_{j,j+1}=1$ and $Q_{jj}=-1$ (indices mod $n$), and for $\varepsilon>0$ let $D_\varepsilon=\varepsilon\operatorname{diag}(1+b\cos(2\pi j/n))_{j=0}^{n-1}$. Put $t_n=3\pi/(2\sin(2\pi/n))$. There is $\varepsilon_0>0$ such that for $0<\varepsilon<\varepsilon_0$ the MMPP $(Q,D_\varepsilon)$ satisfies $\Pp(T^\pi>t_n)<\Pp(T^\alpha>t_n)$. For $b<1$ all arrival rates are positive.
+\end{theorem}
+
+The threshold $12$ is where the first-order term changes sign: for $3\le n\le 11$ the first-order term is positive at every $t>0$ (Remark~\ref{rem:small}). Rounding the case $n=12$, $b=1/2$, $\varepsilon=10^{-3}$ to rationals gives an explicit instance.
+
+\begin{theorem}\label{thm:twelve}
+Let $Q$ be the directed $12$-cycle of Theorem~\ref{thm:cycle} and $D=10^{-6}\operatorname{diag}(p_0,\dots,p_{11})$ with
+\[
+(p_0,\dots,p_{11})=(1500,1433,1250,1000,750,567,500,567,750,1000,1250,1433).
+\]
+Then $\Pp(T^\pi>19/2)-\Pp(T^\alpha>19/2)<-1/300000$. Numerically
+\[
+\Pp(T^\pi>19/2)=0.990546031181966,\qquad \Pp(T^\alpha>19/2)=0.990549434945316,
+\]
+and the difference is $-3.40376335\times10^{-6}$.
+\end{theorem}
+
+The reformulation~\eqref{eq:g} also shows where to look. The order cannot fail for reversible modulators (Proposition~\ref{prop:rev}); this contains the case of symmetric $C$ mentioned in~\cite[Section~4]{AN}. The directed cycle is as far from reversible as possible.
+
+The same list~\cite[Section~4.3]{He} contains the property that $E[X_x]$ is convex and non-increasing in $x\ge0$, where $X_x$ has phase-type representation $(\pi,xQ-D)$. Proposition~\ref{prop:convex} shows that convexity fails, and with it the convexity of the squared coefficient of variation of $X_{D,x}$. We do not address monotonicity.
+
+\section{Periodic Cox processes}
+
+\begin{lemma}\label{lem:period}
+Let $\ell\in L^\infty(\R)$ satisfy $\ell(\cdot+\tau)=\ell$ almost everywhere for some $\tau>0$, and suppose $\ell$ is not almost everywhere constant. Then $P=\{s\in\R:\ell(\cdot+s)=\ell\text{ a.e.}\}=T\mathbb Z$ for some $T>0$.
+\end{lemma}
+
+\begin{proof}
+$P$ is a subgroup of $\R$, and it is closed because $s\mapsto\ell(\cdot+s)$ is continuous into $L^1_{\rm loc}$. A closed subgroup of $\R$ is $\{0\}$, $T\mathbb Z$ or $\R$. It contains $\tau$, so it is not $\{0\}$. If $P=\R$, then $\ell*\phi$ is constant for every continuous $\phi$ with compact support, and letting $\phi$ run through an approximate identity shows that $\ell$ is constant almost everywhere.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cox}]
+Conditionally on $\theta=\vartheta$ the process is Poisson with intensity $\ell(\vartheta+\cdot)$, which gives the formula for $S$. Since $\ell$ is bounded, $t\mapsto e^{-L_\vartheta(t)}$ is Lipschitz uniformly in $\vartheta$, so by Fubini's theorem $S$ is Lipschitz and for almost every $t$
+\[
+-S'(t)=\frac1T\int_0^T\ell(\vartheta+t)\,e^{-L_\vartheta(t)}d\vartheta .
+\]
+Fix such a $t$ and put $H(\vartheta)=L_\vartheta(t)=\Lambda(\vartheta+t)-\Lambda(\vartheta)$, where $\Lambda(x)=\int_0^x\ell$. Then $H$ is Lipschitz and $T$-periodic with $H'(\vartheta)=\ell(\vartheta+t)-\ell(\vartheta)$ for almost every $\vartheta$, so
+\[
+\int_0^T\bigl(\ell(\vartheta+t)-\ell(\vartheta)\bigr)e^{-H(\vartheta)}d\vartheta=\bigl[-e^{-H}\bigr]_0^T=0,
+\]
+and $-S'(t)=\lambda S^0(t)$.
+
+Next, $\E L_\theta(t)=\int_0^t T^{-1}\int_0^T\ell(\vartheta+s)\,d\vartheta\,ds=\lambda t$, so Jensen's inequality gives $S(t)\ge e^{-\lambda t}$, that is $g(t)\ge1$, with equality only if $\vartheta\mapsto L_\vartheta(t)$ is almost everywhere constant on $[0,T)$. Since it is continuous, it would then be constant, its derivative $\ell(\vartheta+t)-\ell(\vartheta)$ would vanish for almost every $\vartheta$, and $t$ would lie in $P=T\mathbb Z$. Hence $g(t)>1$ for $0<t<T$. At $t=T$ the exposure $L_\vartheta(T)=\lambda T$ does not depend on $\vartheta$, so $g(T)=1$; and $g(0)=1$.
+
+Pick $t_1\in(0,T)$. The function $g$ is Lipschitz and $\int_{t_1}^Tg'=g(T)-g(t_1)<0$, so $g'<0$ on a subset of $(t_1,T)$ of positive measure. At almost every point of it, $S-S^0=S+S'/\lambda=\lambda^{-1}e^{-\lambda t}g'<0$.
+\end{proof}
+
+For the square wave $\ell=2$ on $[0,\frac12)$ and $0$ on $[\frac12,1)$, with $\lambda=1$, one finds $g(\frac12)=1.04219$ and a hazard rate $-S'/S=1.1237$ at $t=\frac34$. From a typical instant, the phases that survive to time $t$ are those that have not yet met the high part of the intensity. Near a full period the cycle brings the high part around to all of them at once, and the hazard of $T^\pi$ overshoots the mean rate. An arrival happens inside the high part, so the Palm interval has already paid that cost.
+
+\section{Cosine modulation of a directed cycle}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cycle}]
+Write $\vartheta=2\pi/n$, $c_j=\cos(\vartheta j)$ and $f=\one+bc$, so $D_\varepsilon=\varepsilon\operatorname{diag}(f)$. The cycle generator is doubly stochastic, so $\pi$ is uniform. Since $\sum_jc_j=0$ for $n\ge2$, the mean rate is $\lambda=\varepsilon$ and $\alpha_j=f_j/n$, so $\pi-\alpha=-(b/n)c$ does not depend on $\varepsilon$. Let
+\[
+F_\varepsilon(t)=S_\pi(t)-S_\alpha(t)=-\frac bn\,c^{\top}e^{(Q-\varepsilon\operatorname{diag}f)t}\one .
+\]
+For fixed $t$ this is an entire function of $\varepsilon$ with $F_0(t)=-\frac bn\sum_jc_j=0$. By Duhamel's formula,
+\[
+\frac{d}{d\varepsilon}e^{(Q-\varepsilon\operatorname{diag}f)t}\Big|_{\varepsilon=0}\one=-\int_0^te^{(t-s)Q}\operatorname{diag}(f)\,e^{sQ}\one\,ds=-\int_0^te^{uQ}f\,du,
+\]
+using $e^{sQ}\one=\one$. For the vector $e_\vartheta=(e^{i\vartheta j})_j$ we have $Qe_\vartheta=(e^{i\vartheta}-1)e_\vartheta$, and $e^{i\vartheta}-1=-\delta+i\omega$ with $\delta=1-\cos\vartheta$, $\omega=\sin\vartheta$. Taking real parts, $(e^{uQ}c)_j=e^{-\delta u}\cos(\vartheta j+\omega u)$, so $e^{uQ}f=\one+b\,e^{-\delta u}\bigl(\cos(\vartheta j+\omega u)\bigr)_j$. For $n\ge3$, $\sum_j\cos(2\vartheta j+\omega u)=0$, hence $\sum_jc_j\cos(\vartheta j+\omega u)=\frac n2\cos(\omega u)$ and
+\begin{equation}\label{eq:first}
+\frac{\partial F_\varepsilon(t)}{\partial\varepsilon}\Big|_{\varepsilon=0}=\frac bn\int_0^tc^{\top}e^{uQ}f\,du=\frac{b^2}2J_n(t),\qquad J_n(t)=\int_0^te^{-\delta u}\cos(\omega u)\,du .
+\end{equation}
+Explicitly,
+\[
+J_n(t)=\frac{\delta-e^{-\delta t}(\delta\cos\omega t-\omega\sin\omega t)}{\delta^2+\omega^2},\qquad J_n(t_n)=\frac{\delta-\omega e^{-\delta t_n}}{\delta^2+\omega^2},
+\]
+because $\omega t_n=3\pi/2$. Put $x=\delta/\omega=\tan(\pi/n)$. Then $\delta t_n=\frac{3\pi}2x$, and $J_n(t_n)<0$ if and only if $x\,e^{3\pi x/2}<1$. The left side is increasing in $x$, and $x$ decreases in $n$. At $n=11$ it equals $1.1714$ and at $n=12$ it equals $0.9472$, so $J_n(t_n)<0$ exactly for $n\ge12$. For such $n$, $F_\varepsilon(t_n)=\varepsilon\frac{b^2}{2}J_n(t_n)+O(\varepsilon^2)$ is negative for all small $\varepsilon>0$.
+\end{proof}
+
+\begin{remark}\label{rem:small}
+The minima of $J_n$ on $(0,\infty)$ sit at $\omega t=2\pi k+3\pi/2$, $k\ge0$, where $J_n=(\delta-\omega e^{-\delta t})/(\delta^2+\omega^2)$ increases with $k$. So for $3\le n\le11$ the first-order term~\eqref{eq:first} is positive for every $t>0$, and this family gives no counterexample at small $\varepsilon$. This fits the experiments of~\cite{AN}, whose cyclic generators had order four. Whether~\eqref{eq:IV} holds for every MMPP of order at most $11$ is open.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:twelve}]
+Here $\pi$ is uniform, $\lambda=10^{-3}$ and $\alpha_j=p_j/12000$. Let $r=2003/2000=1+\max_jd_j$ and $B=I+C/r$. Then $B_{jj}=(1500-p_j)/M$ and $B_{j,j+1}=10^6/M$ with $M=1001500$, so $B$ is nonnegative with row sums at most one, and $0\le B^k\one\le\one$ for all $k$. With $a=rt=38057/4000$ at $t=19/2$, uniformization gives
+\[
+e^{a}\bigl(S_\pi(t)-S_\alpha(t)\bigr)=\sum_{k\ge0}\frac{a^k}{k!}\,w B^k\one,\qquad w=\pi-\alpha .
+\]
+Let $N=80$, let $\Sigma$ be the sum over $k\le N$, $E=\sum_{k\le N}a^k/k!$, and
+\[
+R=\frac{a^{N+1}}{(N+1)!}\Big(1-\frac a{N+2}\Big)^{-1}\ \ge\ \sum_{k>N}\frac{a^k}{k!}.
+\]
+Then $E\le e^a\le E+R$, and the tail of the series has absolute value at most $\|w\|_1R$, where $\|w\|_1=3732/12000$. If $\Sigma+\|w\|_1R<0$, then $S_\pi(t)-S_\alpha(t)\le(\Sigma+\|w\|_1R)/(E+R)$. The quantities $\Sigma$, $E$ and $R$ are rational, and an exact computation (Section~\ref{sec:checks}) gives
+\[
+300000\,(\Sigma+\|w\|_1R)+E+R<0,
+\]
+which is the claim. The same computation encloses $S_\pi(t)-S_\alpha(t)$ in an interval of width below $10^{-45}$ around $-3.40376335044947\times10^{-6}$.
+\end{proof}
+
+\begin{remark}\label{rem:24}
+A cruder imitation of a square wave also works. On the directed $24$-cycle with rate $2/3$ on states $0,\dots,11$ and $0$ on states $12,\dots,23$, so that $\lambda=1/3$, one has $\Pp(T^\pi>79/4)=0.0142536155$ and $\Pp(T^\alpha>79/4)=0.0154255223$; the same uniformization bound with $N=140$ encloses the difference around $-1.1719068\times10^{-3}$.
+\end{remark}
+
+\section{Reversible modulators}
+
+\begin{proposition}\label{prop:rev}
+If $Q$ is reversible with respect to $\pi$, then~\eqref{eq:IV} holds.
+\end{proposition}
+
+\begin{proof}
+Let $\langle u,v\rangle_\pi=\sum_i\pi_iu_iv_i$. Reversibility makes $Q$, hence $A=D-Q=-C$, self-adjoint for this inner product. Let $v_1,\dots,v_m$ be an orthonormal eigenbasis of $A$ with eigenvalues $\mu_k$, and $a_k=\langle\one,v_k\rangle_\pi^2$. Then $a_k\ge0$, $\sum_ka_k=\langle\one,\one\rangle_\pi=1$, and
+\[
+S_\pi(t)=\langle\one,e^{-At}\one\rangle_\pi=\sum_ka_ke^{-\mu_kt},\qquad \lambda=\langle\one,A\one\rangle_\pi=\sum_ka_k\mu_k,
+\]
+the second because $Q\one=0$. Let $M$ take the value $\mu_k$ with probability $a_k$. By~\eqref{eq:g}, $S_\alpha=-S_\pi'/\lambda$, so
+\[
+S_\pi(t)-S_\alpha(t)=\E e^{-Mt}-\frac{\E[Me^{-Mt}]}{\E M}=-\frac{\operatorname{Cov}(M,e^{-Mt})}{\E M}\ \ge0,
+\]
+since the covariance of an increasing and a decreasing function of the same random variable is nonpositive.
+\end{proof}
+
+He~\cite[Theorem~3.4]{He} uses reversibility in the same way to show that $E[X_x]$ is non-increasing in $x$.
+
+\section{Convexity in the speed of modulation}
+
+He~\cite{He} writes $X_x$ for the phase-type variable with representation $(\pi,xQ-D)$, and $X_{D,x}$ for the one with representation $(\pi D/\lambda,xQ-D)$; for $x=1$ these are $T^\pi$ and $T^\alpha$. He proves $E[X_x]=\pi(D-xQ)^{-1}\one\ge1/\lambda$ and $\mathrm{SCV}(X_{D,x})=2\lambda E[X_x]-1$~\cite[Theorems~3.1 and~3.2]{He}. Theorem~\ref{thm:twelve} shows that the first property in~\cite[Section~4.3]{He} fails at $x=1$. The next proposition concerns the third.
+
+\begin{proposition}\label{prop:convex}
+Let $Q$ be the directed $6$-cycle and $D=\operatorname{diag}(\tfrac13,\tfrac25,\tfrac23,1,\tfrac23,\tfrac25)$, and $f(x)=E[X_x]=\pi(D-xQ)^{-1}\one$ for $x\ge0$. Then $f''(0)=-1$. Hence $f$, and $x\mapsto\mathrm{SCV}(X_{D,x})$, are strictly concave on $[0,x_0]$ for some $x_0>0$.
+\end{proposition}
+
+\begin{proof}
+$D$ is invertible, so $D-xQ$ is invertible near $x=0$ and $f$ is smooth there, with $f''(0)=2\pi D^{-1}QD^{-1}QD^{-1}\one$. With $\pi$ uniform this is a finite computation: $D^{-1}\one=(3,\tfrac52,\tfrac32,1,\tfrac32,\tfrac52)$, and two further applications of $D^{-1}Q$, where $(Qv)_j=v_{j+1}-v_j$, followed by averaging and doubling give $-1$. The second claim follows from $\mathrm{SCV}(X_{D,x})=2\lambda f(x)-1$ and continuity of $f''$.
+\end{proof}
+
+For this example $f(0)=2$ and $f'(0)=-\tfrac14$, and at positive speeds the exact values give $f(10^{-3})+f(3\cdot10^{-3})-2f(2\cdot10^{-3})=-9.739\times10^{-7}<0$.
+
+\section{Computations}\label{sec:checks}
+
+The script \texttt{code/checks.py} in~\cite{code} carries out the certificate of Theorem~\ref{thm:twelve} in exact rational arithmetic, twice, with the series $wB^k\one$ computed once as $w(B^k\one)$ and once as $(wB^k)\one$; it compares the result with a $40$-digit matrix exponential and checks the opposite sign at $t=1/2$. It does the same for Remark~\ref{rem:24}. It checks the sign of $J_n(t_n)$ for $3\le n\le400$, compares $F_\varepsilon/\varepsilon$ with $\frac{b^2}2J_n$ for $n=12,20$, and checks that $F_\varepsilon>0$ on a grid of times for $n=11$, $b=\frac12$, $\varepsilon=10^{-4}$. It computes the square-wave example of Section~2, tests Proposition~\ref{prop:rev} on $1763$ random reversible MMPPs of orders $2$ to $7$, and computes $f''(0)$ and the convexity gap of Proposition~\ref{prop:convex} exactly. The file \texttt{lean/MMPP.lean} contains the inequality of Theorem~\ref{thm:twelve}, multiplied out to an inequality between integers, and the value $f''(0)=-1$ of Proposition~\ref{prop:convex}, both checked in Lean~4 by evaluation in the kernel.
+
+\section*{Acknowledgements and funding}
+The research presented in this paper was supported by the European Research
+Council (ERC) under the European Union's Horizon Europe research and
+innovation programme (grant agreement No.~101041711), by the Simons
+Foundation as part of the Collaboration on the Mathematical and Scientific
+Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by
+the Israel Science Foundation (grant number 2258/19), and by the Israel
+Science Foundation (ISF Grant 4101/25).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and
+has a management role at Convex Nexus Capital. These entities are included
+in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics. On 8 September 2026 a Claude agent (Anthropic), working in Claude Code, found the reformulation~\eqref{eq:g}, Theorem~\ref{thm:cox} and the $24$-state example of Remark~\ref{rem:24}; on the same day a Codex agent (OpenAI) found the cosine profile behind Theorems~\ref{thm:cycle} and~\ref{thm:twelve}, the rational certificate of Theorem~\ref{thm:twelve}, the argument of Proposition~\ref{prop:rev} and the example of Proposition~\ref{prop:convex}. On 18 October 2026 Claude Opus~5.5, working in Claude Code, checked the proofs line by line, wrote Theorem~\ref{thm:cycle} and its proof, the computer checks, the Lean file and the paper. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Data availability}
+No data were used. The code is available at\\ \url{https://github.com/yspennstate/mmpp-stationary-order}.
+
+\begin{thebibliography}{9}
+\bibitem{AN} A.~Asanjarani and Y.~Nazarathy, \emph{Stationary Markovian arrival processes: results and open problems}, ANZIAM J. \textbf{64} (2022), 54--68.
+\bibitem{ANarx} A.~Asanjarani and Y.~Nazarathy, \emph{Stationary Markovian arrival processes, results and open problems}, arXiv:1905.01736 (2019).
+\bibitem{He} Q.-M.~He, \emph{Bounds on the mean and squared coefficient of variation of phase-type distributions}, J. Appl. Probab. \textbf{58} (2021), 880--889.
+\bibitem{code} Y.~Shmalo, \emph{Code and Lean files for this paper}, \url{https://github.com/yspennstate/mmpp-stationary-order}.
+\end{thebibliography}
+
+\end{document}
