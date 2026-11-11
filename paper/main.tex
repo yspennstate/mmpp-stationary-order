@@ -40,7 +40,7 @@ A Markov-modulated Poisson process (MMPP) is given by an irreducible generator $
 \begin{equation}\label{eq:surv}
 S_\pi(t)=\Pp(T^\pi>t)=\pi e^{Ct}\one,\qquad S_\alpha(t)=\Pp(T^\alpha>t)=\alpha e^{Ct}\one .
 \end{equation}
-Asanjarani and Nazarathy~\cite{AN} study four properties of such processes: $d^2\ge1$ for the index of dispersion of counts, a decreasing hazard rate for $T^\alpha$, $c^2\ge1$ for the squared coefficient of variation of $T^\alpha$, and the stochastic order $T^\pi\ge_{\rm st}T^\alpha$, which is property~(IV), equation~(2.9) of~\cite{AN}:
+For Markovian arrival processes and the MMPP see Neuts~\cite{Neu79} and Fischer and Meier-Hellstern~\cite{FMH93}, and for the stochastic and hazard-rate orders Shaked and Shanthikumar~\cite{SS07}. Asanjarani and Nazarathy~\cite{AN} study four properties of such processes: $d^2\ge1$ for the index of dispersion of counts, a decreasing hazard rate for $T^\alpha$, $c^2\ge1$ for the squared coefficient of variation of $T^\alpha$, and the stochastic order $T^\pi\ge_{\rm st}T^\alpha$, which is property~(IV), equation~(2.9) of~\cite{AN}:
 \begin{equation}\label{eq:IV}
 \pi e^{Ct}\one\ \ge\ \alpha e^{Ct}\one\qquad\text{for all }t\ge0 .
 \end{equation}
@@ -224,6 +224,7 @@ The paper is part of the Math Brain project, whose public repository is \url{htt
 \bibitem{AN} A.~Asanjarani and Y.~Nazarathy, \emph{Stationary Markovian arrival processes: results and open problems}, ANZIAM J. \textbf{64} (2022), 54--68.
 \bibitem{ANarx} A.~Asanjarani and Y.~Nazarathy, \emph{Stationary Markovian arrival processes, results and open problems}, arXiv:1905.01736 (2019).
 \bibitem{AN18} A.~Asanjarani and Y.~Nazarathy, \emph{The squared coefficient of variation for MMPP is greater than unity}, arXiv:1802.08400v1 (2018), withdrawn.
+\bibitem{FMH93} W.~Fischer and K.~Meier-Hellstern, \emph{The Markov-modulated Poisson process (MMPP) cookbook}, Perform. Eval. \textbf{18} (1993), 149--171.
 \bibitem{He} Q.-M.~He, \emph{Bounds on the mean and squared coefficient of variation of phase-type distributions}, J. Appl. Probab. \textbf{58} (2021), 880--889.
 \bibitem{code} Y.~Shmalo, \emph{Code and Lean files for this paper}, \url{https://github.com/yspennstate/mmpp-stationary-order}.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
@@ -232,6 +233,8 @@ The paper is part of the Math Brain project, whose public repository is \url{htt
 
 \bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
 
+\bibitem{Neu79} M.~F.~Neuts, \emph{A versatile Markovian point process}, J. Appl. Probab. \textbf{16} (1979), 764--779.
+\bibitem{SS07} M.~Shaked and J.~G.~Shanthikumar, \emph{Stochastic Orders}, Springer Series in Statistics, Springer, New York, 2007.
 \end{thebibliography}
 
 \end{document}
