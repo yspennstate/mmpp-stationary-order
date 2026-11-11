@@ -44,7 +44,7 @@ Asanjarani and Nazarathy~\cite{AN} study four properties of such processes: $d^2
 \begin{equation}\label{eq:IV}
 \pi e^{Ct}\one\ \ge\ \alpha e^{Ct}\one\qquad\text{for all }t\ge0 .
 \end{equation}
-They prove all four for Markov-switched Poisson processes and for MMPPs of order two, observe that the hazard-rate property fails for general MMPPs, and state~\eqref{eq:IV} for every irreducible MMPP as Conjecture~3.9 of~\cite[p.~65]{AN} (Conjecture~4.2 in the preprint~\cite{ANarx}). Their search over $10^6$ random MMPPs of each order $3,4,5,6$ and over $10^6$ random cyclic generators of order $4$ found no violation. He~\cite[Section~4.3]{He} lists the same property, in the form ``$X_x$ is stochastically larger than $X_{D,x}$'', among the properties that all MMPP-type phase-type distributions have numerically. The squared-coefficient conjecture is a theorem of He~\cite[Theorem~3.2]{He}.
+They prove all four for Markov-switched Poisson processes and for MMPPs of order two, observe that the hazard-rate property fails for general MMPPs, and state~\eqref{eq:IV} for every irreducible MMPP as Conjecture~3.9 of~\cite[p.~65]{AN} (Conjecture~4.2 in the preprint~\cite{ANarx}). Their search over $10^6$ random MMPPs of each order $3,4,5,6$ and over $10^6$ random cyclic generators of order $4$ found no violation. An earlier preprint of the same authors~\cite[Theorem~3.1]{AN18} states~\eqref{eq:IV} for every MMPP; it has since been withdrawn. He~\cite[Section~4.3]{He} lists the same property, in the form ``$X_x$ is stochastically larger than $X_{D,x}$'', among the properties that all MMPP-type phase-type distributions have numerically. The squared-coefficient conjecture is a theorem of He~\cite[Theorem~3.2]{He}.
 
 We show that~\eqref{eq:IV} fails. The first observation is a reformulation. Since $\pi Q=0$, $S_\pi'(t)=\pi Ce^{Ct}\one=-\pi De^{Ct}\one=-\lambda S_\alpha(t)$, so
 \begin{equation}\label{eq:g}
@@ -223,6 +223,7 @@ The paper is part of the Math Brain project, whose public repository is \url{htt
 \begin{thebibliography}{9}
 \bibitem{AN} A.~Asanjarani and Y.~Nazarathy, \emph{Stationary Markovian arrival processes: results and open problems}, ANZIAM J. \textbf{64} (2022), 54--68.
 \bibitem{ANarx} A.~Asanjarani and Y.~Nazarathy, \emph{Stationary Markovian arrival processes, results and open problems}, arXiv:1905.01736 (2019).
+\bibitem{AN18} A.~Asanjarani and Y.~Nazarathy, \emph{The squared coefficient of variation for MMPP is greater than unity}, arXiv:1802.08400v1 (2018), withdrawn.
 \bibitem{He} Q.-M.~He, \emph{Bounds on the mean and squared coefficient of variation of phase-type distributions}, J. Appl. Probab. \textbf{58} (2021), 880--889.
 \bibitem{code} Y.~Shmalo, \emph{Code and Lean files for this paper}, \url{https://github.com/yspennstate/mmpp-stationary-order}.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
